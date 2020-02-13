@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Swissup\MarketplaceChannelGithub\Model\Channel\SwissupGithub"
+                 type="Swissup\Marketplace\Model\Channel\Composer">
+        <arguments>
+            <argument name="title" xsi:type="string">Swissup Private Packages</argument>
+            <argument name="url" xsi:type="string">https://docs.swissuplabs.com/packages/</argument>
+            <argument name="hostname" xsi:type="string">github.com</argument>
+            <argument name="identifier" xsi:type="string">swissupgithub</argument>
+        </arguments>
+    </virtualType>
+    <type name="Swissup\Marketplace\Model\ChannelRepository">
+        <arguments>
+            <argument name="channels" xsi:type="array">
+                <item name="swissupgithub" xsi:type="object">Swissup\MarketplaceChannelGithub\Model\Channel\SwissupGithub</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Swissup\MarketplaceChannelGithub\Ui\DataProvider\Form\SettingsDataProvider\Modifier\SwissupGithub"
+                 type="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\AbstractModifier">
+        <arguments>
+            <argument name="channel" xsi:type="object">Swissup\MarketplaceChannelGithub\Model\Channel\SwissupGithub</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Swissup\Marketplace\Ui\DataProvider\Form\SettingsDataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="swissupgithub" xsi:type="array">
+                    <item name="class" xsi:type="string">Swissup\MarketplaceChannelGithub\Ui\DataProvider\Form\SettingsDataProvider\Modifier\SwissupGithub</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>
